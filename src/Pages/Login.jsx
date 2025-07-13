@@ -10,6 +10,38 @@ function Login() {
   const [ResponseMessage, setResponseMessage] = useState("");
   const [ResponseColor, setResponseColor] = useState("");
 
+
+
+ const handleDemo = async (event) => {
+    event.preventDefault();
+     alert("The backend is hosted on Render.com (free tier), so it may take up to 60 seconds to wake up. Please wait patiently while we log you in.");
+
+    const data = {
+      username: "Admin123",
+      password: "Admin@123",
+    };
+    try {
+      const response = await axios.post(`${URL}/login`, data);
+      window.localStorage.setItem("token", response.data.token);
+      setResponse(true);
+      setResponseMessage("Login Successful.");
+      setResponseColor("text-green-600");
+      setTimeout(() => {
+        navigate("/admin/dashboard");
+      }, 1000);
+    } catch (error) {
+      console.error(error);
+      setResponse(true);
+      setResponseColor("text-red-600");
+      setResponseMessage("Login Failed!");
+    } finally {
+      setTimeout(() => {
+        setResponse(false);
+      }, 1000);
+    }
+  };
+
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {
@@ -106,7 +138,16 @@ function Login() {
             >
               Login
             </button>
+            
           </form>
+           &nbsp;
+           <button
+             onClick={handleDemo}
+
+              className="w-full text-white  bg-spangles-700 hover:bg-spangles-800 focus:ring-4 focus:outline-none focus:ring-spangles-300 font-medium rounded-lg text-base px-5 py-2.5 text-center dark:bg-spangles-600 dark:hover:bg-spangles-700 dark:focus:ring-spangles-800"
+            >
+              View Demo
+            </button>
         </div>
       </section>
     </React.Fragment>
