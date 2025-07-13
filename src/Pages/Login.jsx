@@ -12,7 +12,7 @@ function Login() {
 
 
 
- const handleDemo = async (event) => {
+   const handleDemo = async (event) => {
     event.preventDefault();
      alert("The backend is hosted on Render.com (free tier), so it may take up to 60 seconds to wake up. Please wait patiently while we log you in.");
 
@@ -144,7 +144,7 @@ function Login() {
            <button
              onClick={handleDemo}
 
-              className="w-full text-white  bg-spangles-700 hover:bg-spangles-800 focus:ring-4 focus:outline-none focus:ring-spangles-300 font-medium rounded-lg text-base px-5 py-2.5 text-center dark:bg-spangles-600 dark:hover:bg-spangles-700 dark:focus:ring-spangles-800"
+                           className="w-full text-white bg-lavender--600 hover:bg-lavender--600 focus:ring-4 focus:outline-none focus:ring-lavender--600 font-medium rounded-lg text-base px-5 py-2.5 text-center dark:bg-lavender--600 dark:hover:bg-lavender--600 dark:focus:ring-lavender--600"
             >
               View Demo
             </button>
