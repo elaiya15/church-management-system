@@ -15,12 +15,7 @@ function Sidebar({ isOpen, onClose }) {
   const location = useLocation();
   const [showDropdown, setShowDropdown] = useState(false);
   // console.log(showDropdown);
-  useEffect(() => {
-  if (location.pathname.includes("/offerings")) {
-    setShowDropdown(true);
-  }
-}, [location.pathname]);
-
+  
 
   useEffect(() => {
     initFlowbite();
@@ -88,17 +83,17 @@ function Sidebar({ isOpen, onClose }) {
       {/* Backdrop */}
       <div
         onClick={onClose}
-        className={`fixed inset-0  bg-black bg-opacity-40 z-40 md:hidden transition-opacity ${
+        className={`fixed inset-0 bg-black bg-opacity-40 z-40 md:hidden transition-opacity ${
           isOpen ? "block" : "hidden"
         }`}
       ></div>
 
       <aside
-        className={`fixed top-0 left-0 z-50 w-[20rem] h-full bg-white transition-transform duration-300 transform ${
+        className={`fixed top-0 left-0 z-50 w-[24rem] h-full bg-white transition-transform duration-300 transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } md:static md:translate-x-0 md:block`}
       >
-        <div className="flex flex-col justify-between h-full overflow-y-auto">
+        <div className="flex flex-col justify-between h-full overflow-y-auto py-7 pe-7">
           <ul className="space-y-5 font-medium">
             {navItems.map(({ to, icon, label, match }, idx) => (
               <li key={idx}>
@@ -143,24 +138,20 @@ function Sidebar({ isOpen, onClose }) {
               </div>
               {showDropdown && (
                 <div className="mt-2 space-y-2 ml-14">
-                {offeringLinks.map(({ to, label }, idx) => (
-  <Link
-    key={idx}
-    to={to}
-    onClick={() => {
-      setShowDropdown(false);
-      onClose();
-    }}
-    className={`${
-      location.pathname.startsWith(to)
-        ? "bg-lavender--600 text-white hover:text-lavender--600 hover:bg-slate-100"
-        : "text-gray-800 hover:bg-slate-100 hover:text-lavender--600"
-    } block px-6 py-2 rounded-lg`}
-  >
-    <span className="text-md">{label}</span>
-  </Link>
-))}
-
+                  {offeringLinks.map(({ to, label, match }, idx) => (
+                    <Link
+                      key={idx}
+                      to={to}
+                      onClick={onClose}
+                      className={`${
+                        location.pathname.includes(match)
+                          ? "bg-lavender--600 text-white hover:text-lavender--600 hover:bg-slate-100"
+                          : "text-gray-800 hover:bg-slate-100 hover:text-lavender--600"
+                      } block px-6 py-2 rounded-lg`}
+                    >
+                      <span className="text-md">{label}</span>
+                    </Link>
+                  ))}
                 </div>
               )}
             </li>

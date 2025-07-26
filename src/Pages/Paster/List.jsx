@@ -1,14 +1,21 @@
-import React, { useEffect } from "react";
-import { useSearchParams } from "react-router-dom"; // ✅ Import to manage query params
+import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import FamilyList from "./PasterFamilyList.jsx";
 import PasterList from "./PasterList.jsx";
 
 function List() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const activeTab = searchParams.get("tab") || "paster-list"; // ✅ Read tab from URL
+  const initialTab = searchParams.get("tab") || "paster-list";
+  const [activeTab, setActiveTab] = useState(initialTab);
+
+  // Sync state with URL query parameter
+  useEffect(() => {
+    const tabParam = searchParams.get("tab") || "paster-list";
+    setActiveTab(tabParam);
+  }, [searchParams]);
 
   const handleTabChange = (tab) => {
-    setSearchParams({ tab }); // ✅ Updates the URL without reloading
+    setSearchParams({ tab });
   };
 
   return (
@@ -21,7 +28,7 @@ function List() {
               ? "border-b-2 border-indigo-600 text-indigo-600"
               : "text-gray-500"
           }`}
-          onClick={() => handleTabChange("paster-list")} // ✅ Update URL on click
+          onClick={() => handleTabChange("paster-list")}
         >
           Pastor List
         </button>
@@ -37,9 +44,9 @@ function List() {
         </button>
       </nav>
 
-      {/* Conditional Rendering Based on Active Tab */}
+      {/* Conditional Rendering */}
       <div className="">
-        {activeTab === "paster-list" ? <PasterList /> : <FamilyList />}
+        {activeTab === "paster-family-list" ? <FamilyList /> : <PasterList />}
       </div>
     </div>
   );

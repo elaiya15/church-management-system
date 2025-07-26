@@ -41,7 +41,7 @@ import RejoiningReports from "./Components/Reports/Rejoining";
 import RemindersReports from "./Components/Reports/Reminders";
 import ReportsList from "./Pages/ReportsList/ReportsList";
 import ReportsPage from "./Pages/ReportsList/ReportsPage";
-
+// import LandscapeWrapper from "./Components/LandscapeWrapper"; 
 export const URL = import.meta.env.VITE_BACKEND_API_URL;
 
 function App() {
@@ -51,7 +51,9 @@ function App() {
         <Routes>
           <Route path="*" element={<Navigate to={`/admin/dashboard`} />} />
           <Route path="/" element={<Login />} />
+          {/* <Route path="admin" element={<LandscapeWrapper><ContainerMain /></LandscapeWrapper>}> */}
           <Route path="admin" element={<ContainerMain />}>
+          
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="reminders" element={<RemindersReports />} />
 
