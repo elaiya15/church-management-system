@@ -15,7 +15,7 @@ console.log(sidebarOpen);
       <Navbar onMenuClick={toggleSidebar} />
       <div className="flex flex-1">
         <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
-        <main className="flex-1 p-5 overflow-auto bg-slate-50">
+        <main className="flex-1 overflow-auto md:p-5 bg-slate-50">
           <Outlet />
         </main>
       </div>

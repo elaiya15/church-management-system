@@ -318,7 +318,7 @@ useEffect(() => {
 
   return (
     <div className="relative h-auto ml-5 w-[100%] bg-gray-100">
-      <div className="p-6 bg-white   min-h-screen rounded-lg shadow-lg">
+      <div className="min-h-screen p-6 bg-white rounded-lg shadow-lg">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-2xl font-semibold text-lavender--600">Reports</h2>
           <div className="flex gap-x-5">
@@ -362,7 +362,7 @@ useEffect(() => {
           </button> */}
         </div>
         <br />
-        <div className="grid grid-cols-5 gap-2 mb-4">
+         <div className="grid grid-cols-2 gap-2 mb-4 md:grid-cols-4">
           <div>
             <label className="block mb-1 text-gray-600">From</label>
             <input
@@ -398,7 +398,7 @@ useEffect(() => {
               <option value="Sunday">Sunday</option>
             </select>
           </div>
-          <div className="col-span-2 w-[50%] ">
+          <div className="col-span-1 w-[100%] ">
             <label className="block mb-1 text-gray-600">Search</label>
             <input
               type="text"
@@ -410,7 +410,7 @@ useEffect(() => {
           </div>
         </div>
 
-        <div ref={componentRef}>
+        <div className="overflow-x-auto" ref={componentRef}>
           <table className="min-w-full bg-white">
             <thead>
              {filteredData && filteredData.length > 0 ?( <tr>
@@ -445,9 +445,9 @@ useEffect(() => {
     </tr>
   ))
 ) : (
-  <div className="text-center m-10 flex flex-col justify-center items-center" >
-    <p className=" text-2xl text-center  text-indigo-600">No data available </p>
-    <p className=" text-xl text-center "> select Fromdate and Todate</p>
+  <div className="flex flex-col items-center justify-center m-10 text-center" >
+    <p className="text-2xl text-center text-indigo-600 ">No data available </p>
+    <p className="text-xl text-center "> select Fromdate and Todate</p>
   </div>
 )}
 

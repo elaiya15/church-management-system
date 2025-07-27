@@ -308,19 +308,13 @@ const handleDownloadPDF = async () => {
   return (
     <div className="p-4">
       <div className="flex flex-col items-center justify-between px-3 space-y-4 sm:flex-row sm:space-y-0 sm:space-x-11">
-        <div className="text-xl font-bold capitalize">{category} </div>
-        {/* <div className="flex space-x-5">
-          <MdOutlineFileDownload
-            size={25}
-            className="cursor-pointer text-lavender--600"
-          />
-          <IoMdPrint size={25} className="cursor-pointer text-lavender--600" />
-        </div> */}
+        <div className="text-xl font-bold capitalize">{category}</div>
+    
       </div>
 
       <div className="h-full p-5 mx-1 mt-3 bg-white shadow-md rounded-xl ">
         <div className="flex flex-col items-center justify-between lg:flex-row">
-          <div className="flex flex-wrap items-center justify-center gap-4 ">
+          <div className="flex flex-wrap items-center p-4 space-x-3 space-y-3 lg:space-y-0 lg:space-x-3">
             <div className="flex flex-col items-start w-full px-1 space-y-2 border rounded-lg lg:flex-row lg:items-center lg:space-y-0 lg:w-auto">
               <label htmlFor="from-date" className="text-gray-700">
                 From:
@@ -348,44 +342,11 @@ const handleDownloadPDF = async () => {
                 onChange={handleToDateChange}
               />
             </div>
-
-            {/* <span className="flex items-center w-full px-1 border rounded-lg lg:w-auto">
-              <IoIosSearch />
-              <input
-                type="text"
-                placeholder="Search...."
-                className="flex-grow border-0 focus:ring-0"
-                value={searchQuery}
-                onChange={handleSearch}
-              />
-            </span> */}
-         
             <div className="relative">
               <div className="absolute inset-y-0 flex items-center pointer-events-none start-0 ps-3">
-                {/* <svg
-                  className="w-3 h-3 text-gray-500 dark:text-gray-400"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                  />
-                </svg> */}
+              
               </div>
-              {/* <input
-                type="search"
-                id="default-search"
-                className="block py-1 text-sm text-gray-900 rounded w-54 ps-8 bg-gray-50 focus:ring-lavender--600 focus:border-lavender--600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lavender--600 dark:focus:border-lavender--600"
-                placeholder="Search..."
-                value={searchQuery}
-                onChange={handleSearch}
-              /> */}
+            
             </div>
           </div>
           <div className="flex w-full gap-x-4 lg:w-auto">
@@ -423,9 +384,7 @@ const handleDownloadPDF = async () => {
       
         /> */}
 
-<div className="flex flex-wrap items-center justify-center gap-4 mt-4 md:justify-between ">
-
-  <div className="flex flex-wrap gap-2">
+<div className="flex items-center justify-center mt-4 space-x-2">
           <button
             onClick={() => setCurrentPage(CurrentPage - 1)}
             disabled={CurrentPage === 1}
@@ -449,10 +408,7 @@ const handleDownloadPDF = async () => {
           >
             Next
           </button>
-  </div>
- 
- 
-    <div className="flex space-x-2 rounded right-10">
+          <div className="absolute flex px-3 space-x-2 rounded right-10 ">
   <span  className="px-4 py-2 text-center text-gray-700 bg-gray-100 rounded" >Total Page: <span >{TotalPages}</span>
  </span>
  <span

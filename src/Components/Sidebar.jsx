@@ -94,7 +94,7 @@ function Sidebar({ isOpen, onClose }) {
       ></div>
 
       <aside
-        className={`fixed top-0 left-0 z-50 w-[20rem] h-full bg-white transition-transform duration-300 transform ${
+        className={`fixed top-0 left-0 z-50 w-[15rem] lg:w-[20rem] h-full bg-white transition-transform duration-300 transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } md:static md:translate-x-0 md:block`}
       >

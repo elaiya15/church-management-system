@@ -200,43 +200,34 @@ function List() {
   //   };
 
   return (
-  <>
+<>
   {isDownloading && (
     <div className="p-2 font-semibold text-center text-blue-500 bg-blue-100 rounded-md">
       Your download is in progress, please wait...
     </div>
   )}
 
-  <div className="flex flex-col w-full p-5 mt-5 space-y-10 bg-white rounded-t-lg">
+  <div className="relative w-full p-5 mt-5 space-y-6 bg-white rounded-t-lg">
     {/* Top Controls */}
-    <div className="flex flex-wrap items-center justify-between space-y-5">
-      <div className="inline-flex space-x-3">
-        <h1 className="text-lg font-semibold text-lavender--600">
-          Pastor List
-        </h1>
-      </div>
+    <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+      <h1 className="text-lg font-semibold text-lavender--600">Pastor List</h1>
 
-      <div className="flex flex-wrap items-center space-x-5">
-        <div className="w-full lg:w-auto">
-          <Dropdown
-            items={categories}
-            onSelect={handleSelect}
-            label="Status"
-            selected={selectedCategory}
-          />
-        </div>
+      <div className="flex flex-col w-full gap-3 sm:flex-row sm:items-center sm:space-x-5 sm:w-auto">
+        <Dropdown
+          items={categories}
+          onSelect={handleSelect}
+          label="Status"
+          selected={selectedCategory}
+        />
 
-        <div className="">
-          <label
-            htmlFor="default-search"
-            className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
-          >
+        <div className="w-full sm:w-auto">
+          <label htmlFor="default-search" className="sr-only">
             Search Members
           </label>
           <div className="relative">
-            <div className="absolute inset-y-0 flex items-center pointer-events-none start-0 ps-3">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <svg
-                className="w-3 h-3 text-gray-500 dark:text-gray-400"
+                className="w-4 h-4 text-gray-500"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 20 20"
@@ -253,7 +244,7 @@ function List() {
             <input
               type="search"
               id="default-search"
-              className="block py-1 text-sm text-gray-900 rounded w-54 ps-8 bg-gray-50 focus:ring-lavender--600 focus:border-lavender--600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lavender--600 dark:focus:border-lavender--600"
+              className="w-full py-2 pl-10 pr-3 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-lavender--600 focus:border-lavender--600"
               placeholder="Search Members..."
               onChange={(e) => {
                 setCurrentPage(1);
@@ -269,92 +260,93 @@ function List() {
     {loading ? (
       <Spinners />
     ) : Data && Data.length > 0 ? (
-      <table className="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
-        <thead className="text-base text-gray-700 bg-white dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            {[
-              "Sl.No",
-              "Pastor Id",
-              "Pastor Name",
-              "Pastor Family Id",
-              "Status",
-              "Action",
-            ].map((item, index) => (
-              <th key={index} className="px-4 py-3">
-                {item}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {Data.map((item, index) => (
-            <tr
-              key={item.member_id}
-              className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-            >
-              <td className="px-4 py-4 text-sm">
-                {(CurrentPage - 1) * 15 + (index + 1)}
-              </td>
-              <td className="px-4 py-4 text-sm">{item.member_id}</td>
-              <td className="px-4 py-4 text-sm">{item.member_name}</td>
-              <td className="px-4 py-4 text-sm">{item.familyId}</td>
-              <td
-                className={`${
-                  item.status === "Active" ? "text-green-600" : "text-red-600"
-                } px-4 py-4 text-sm font-semibold`}
+      <div className="overflow-x-auto">
+        <table className="min-w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead className="text-base text-gray-700 bg-white dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              {["Sl.No", "Pastor Id", "Pastor Name", "Pastor Family Id", "Status", "Action"].map(
+                (item, index) => (
+                  <th key={index} className="px-4 py-3 whitespace-nowrap">
+                    {item}
+                  </th>
+                )
+              )}
+            </tr>
+          </thead>
+          <tbody>
+            {Data.map((item, index) => (
+              <tr
+                key={item.member_id}
+                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
               >
-                {item.status}
-              </td>
-              <td className="flex gap-5 px-4 py-4 text-sm">
-                <Link
-                  to={`/admin/pastor/${item.member_id}/preview`}
-                  className="px-1.5 py-1 rounded bg-slate-100 hover:bg-slate-200"
+                <td className="px-4 py-4 text-sm">
+                  {(CurrentPage - 1) * 15 + (index + 1)}
+                </td>
+                <td className="px-4 py-4 text-sm">{item.member_id}</td>
+                <td className="px-4 py-4 text-sm">{item.member_name}</td>
+                <td className="px-4 py-4 text-sm">{item.familyId}</td>
+                <td
+                  className={`${
+                    item.status === "Active" ? "text-green-600" : "text-red-600"
+                  } px-4 py-4 text-sm font-semibold`}
                 >
-                  <i className="fa-solid fa-eye"></i>
-                </Link>
+                  {item.status}
+                </td>
+                <td className="flex gap-3 px-4 py-4 text-sm">
+                  <Link
+                    to={`/admin/pastor/${item.member_id}/preview`}
+                    className="px-2 py-1 rounded bg-slate-100 hover:bg-slate-200"
+                  >
+                    <i className="fa-solid fa-eye"></i>
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    ) : (
+      <div className="overflow-x-auto">
+        <table className="min-w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <tbody>
+            <tr>
+              <td
+                colSpan="7"
+                className="px-4 py-4 text-sm text-center text-gray-500 dark:text-gray-400"
+              >
+                No members found
               </td>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    ) : (
-      <table className="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
-        <tbody>
-          <tr>
-            <td
-              colSpan="7"
-              className="px-4 py-4 text-sm text-center text-gray-500 dark:text-gray-400"
-            >
-              No members found
-            </td>
-          </tr>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     )}
 
-    {/* Pagination Controls */}
-    <div className="relative flex items-center justify-center mt-4 space-x-2">
-      <button
-        onClick={() => setCurrentPage(CurrentPage - 1)}
-        disabled={CurrentPage === 1}
-        className="px-4 py-2 text-gray-700 bg-gray-200 rounded disabled:opacity-50"
-      >
-        Previous
-      </button>
+    {/* Pagination */}
+    <div className="relative flex flex-wrap items-center justify-between gap-3 mt-4">
+      <div className="flex flex-wrap items-center justify-center gap-2">
+        <button
+          onClick={() => setCurrentPage(CurrentPage - 1)}
+          disabled={CurrentPage === 1}
+          className="w-24 px-4 py-2 text-gray-700 bg-gray-200 rounded disabled:opacity-50"
+        >
+          Previous
+        </button>
 
-      <button className="px-4 py-2 text-white rounded bg-lavender--600">
-        {CurrentPage}
-      </button>
+        <button className="px-4 py-2 text-white rounded bg-lavender--600">
+          {CurrentPage}
+        </button>
 
-      <button
-        onClick={() => setCurrentPage(CurrentPage + 1)}
-        disabled={CurrentPage === TotalPages || TotalPages === 0}
-        className="px-4 py-2 text-gray-700 bg-gray-200 rounded disabled:opacity-50"
-      >
-        Next
-      </button>
+        <button
+          onClick={() => setCurrentPage(CurrentPage + 1)}
+          disabled={CurrentPage === TotalPages || TotalPages === 0}
+          className="w-24 px-4 py-2 text-gray-700 bg-gray-200 rounded disabled:opacity-50"
+        >
+          Next
+        </button>
+      </div>
 
-      <div className="absolute flex px-3 space-x-2 rounded right-5">
+      <div className="flex flex-wrap justify-center gap-2 mt-2">
         <span className="px-4 py-2 text-center text-gray-700 bg-gray-100 rounded">
           Total Page: <span>{TotalPages}</span>
         </span>
@@ -380,6 +372,8 @@ function List() {
       <FailedMessage Message={Response.message} />
     ) : null)}
 </>
+
+
 
   );
 }

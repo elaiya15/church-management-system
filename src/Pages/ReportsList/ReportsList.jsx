@@ -23,7 +23,7 @@ const Sidebar = ({ active, setActive } ) => {
   };
 
   return (
-    <div className="bg-white w-44 ">
+    <div className="w-24 bg-white md:w-44 ">
       <ul>
         {items.map((item, index) => (
           <li

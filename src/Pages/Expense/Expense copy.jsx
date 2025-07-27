@@ -573,151 +573,159 @@ export default function Expense() {
   
 
   return (
-              <div>
-  {isSuccess && <SuccessMessage Message="New Expenses added" />}
-
-  {/* Header */}
-  <div className="flex flex-col justify-between px-3 space-y-3 sm:flex-row sm:items-end sm:space-y-0 sm:space-x-4">
-    <div className="text-xl font-bold">Expense</div>
-
-    {fromDate && toDate && (
-      <button
-        onClick={handleDownloadPDF}
-        className="text-blue-600 hover:text-blue-800 sm:mr-4"
-      >
-        <img src={down} alt="Download" />
-      </button>
-    )}
-  </div>
-
-  {/* Filters + Table Container */}
-  <div className="h-full p-3 mt-4 bg-white shadow-md rounded-xl">
-
-    {/* Filters */}
-    <div className="flex flex-col gap-3 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between">
-      {/* Date From */}
-      <div className="flex flex-col w-full gap-1 p-2 border rounded-lg sm:w-auto sm:flex-row sm:items-center">
-        <label htmlFor="from-date" className="text-gray-700">From:</label>
-        <input
-          type="date"
-          id="from-date"
-          className="px-2 py-1 border-0 rounded focus:ring-0"
-          max={today}
-          value={fromDate}
-          onChange={handleFromDateChange}
-        />
+    <div>
+      {isSuccess && <SuccessMessage Message="New Expenses added" />}
+      <div className="flex items-end justify-between px-3 space-x-11">
+        <div className="text-xl font-bold">Expense</div>
+       
+         <div className="flex space-x-5">
+         { fromDate && toDate? <button
+              onClick={handleDownloadPDF}
+              className="mr-4 text-blue-600 cursor-pointer hover:text-blue-800"
+            >
+              <img src={down} />
+            </button>:null}
+            </div>
       </div>
-
-      {/* Date To */}
-      <div className="flex flex-col w-full gap-1 p-2 border rounded-lg sm:w-auto sm:flex-row sm:items-center">
-        <label htmlFor="to-date" className="text-gray-700">To:</label>
-        <input
-          type="date"
-          id="to-date"
-          className="px-2 py-1 border-0 rounded focus:ring-0"
-          max={today}
-          value={toDate}
-          onChange={handleToDateChange}
-        />
-      </div>
-
-      {/* Category Dropdown */}
-      <div className="w-full sm:w-auto">
-        <Dropdown
-          items={categories}
-          onSelect={handleSelect}
-          label="Category"
-        />
-      </div>
-
-      {/* Search Box */}
-      <div className="relative w-full sm:w-auto">
-        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-          <svg
-            className="w-4 h-4 text-gray-500"
-            fill="none"
-            viewBox="0 0 20 20"
-          >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+      {/* filter options and table */}
+      <div className="h-full p-2 mx-1 mt-3 bg-white shadow-md rounded-xl">
+        <div className="flex flex-wrap items-center justify-between p-4 space-x-3 space-y-3 lg:space-y-0 lg:space-x-3">
+          <div className="flex flex-col items-start w-full px-1 space-y-2 border rounded-lg lg:flex-row lg:items-center lg:space-y-0 lg:space-x-0 lg:w-auto">
+            <label htmlFor="from-date" className="text-gray-700">
+              From:
+            </label>
+            <input
+              type="date"
+              id="from-date"
+              className="px-2 py-1 border-0 rounded focus:ring-0"
+              max={today}
+              value={fromDate}
+              onChange={handleFromDateChange}
             />
-          </svg>
+          </div>
+          <div className="flex flex-col items-start w-full px-1 space-y-2 border rounded-lg lg:flex-row lg:items-center lg:space-y-0 lg:space-x-0 lg:w-auto">
+            <label htmlFor="to-date" className="text-gray-700">
+              To:
+            </label>
+            <input
+              type="date"
+              id="to-date"
+              className="px-2 py-1 border-0 rounded focus:ring-0"
+              max={today}
+              value={toDate}
+              onChange={handleToDateChange}
+            />
+          </div>
+
+          <div className="w-full lg:w-auto">
+            <Dropdown
+              items={categories}
+              onSelect={handleSelect}
+              label="Category"
+            />
+          </div>
+
+          {/* <span className="flex items-center w-full px-1 border rounded-lg lg:w-auto">
+            <IoIosSearch />
+            <input
+              type="text"
+              placeholder={`Search....`}
+              className="flex-grow border-0 focus:ring-0"
+              value={searchQuery}
+              onChange={handleSearch}
+            />
+          </span> */}
+
+          <div className="relative">
+            <div className="absolute inset-y-0 flex items-center pointer-events-none start-0 ps-3">
+              <svg
+                className="w-3 h-3 text-gray-500 dark:text-gray-400"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                />
+              </svg>
+            </div>
+            <input
+              type="search"
+              id="default-search"
+              className="block py-1 text-sm text-gray-900 rounded w-54 ps-8 bg-gray-50 focus:ring-lavender--600 focus:border-lavender--600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lavender--600 dark:focus:border-lavender--600"
+              placeholder="Search..."
+              value={searchQuery}
+              onChange={handleSearch}
+            />
+          </div>
+
+          <div className="w-full lg:w-auto">
+            <button
+              onClick={handleOpenModal}
+              className="flex items-center w-full gap-2 px-5 py-2 text-white bg-purple-500 rounded-lg lg:w-auto"
+            >
+              <FaPlus /> Add Expense
+            </button>
+          </div>
         </div>
-        <input
-          type="search"
-          className="w-full py-1 pl-10 pr-3 text-sm text-gray-900 border rounded bg-gray-50 focus:ring-lavender--600 focus:border-lavender--600"
-          placeholder="Search..."
-          value={searchQuery}
-          onChange={handleSearch}
-        />
-      </div>
 
-      {/* Add Expense Button */}
-      <div className="w-full sm:w-auto">
-        <button
-          onClick={handleOpenModal}
-          className="flex items-center justify-center w-full gap-2 px-5 py-2 text-white bg-purple-500 rounded-lg sm:w-auto"
-        >
-          <FaPlus /> Add Expense
-        </button>
-      </div>
-    </div>
+        <ExpenseTable expenses={expenses} loading={loading} CurrentPage={currentPage}/>
 
-    {/* Table */}
-    <ExpenseTable expenses={expenses} loading={loading} CurrentPage={currentPage} />
-
-    {/* Total */}
-    {totalAmount && (
-      <div className="pt-6 text-right">
-        <h6 className="text-base font-bold sm:text-xl">
-          Total Amount: <span className="text-2xl text-lavender--600">{totalAmount.toLocaleString("en-IN")}</span>
-        </h6>
-      </div>
-    )}
-
-    {/* Pagination */}
-    <div className="flex flex-col items-center justify-center gap-2 mt-6 sm:flex-row sm:justify-between sm:items-center">
-      <div className="flex items-center gap-2">
-        <button
-          onClick={() => setCurrentPage(currentPage - 1)}
-          disabled={currentPage === 1}
-          className="px-4 py-2 text-gray-700 bg-gray-200 rounded disabled:opacity-50"
-        >
-          Previous
-        </button>
-        <button className="px-4 py-2 text-white rounded bg-lavender--600">
-          {currentPage}
-        </button>
-        <button
-          onClick={() => setCurrentPage(currentPage + 1)}
-          disabled={currentPage === totalPages || totalPages === 0}
-          className="px-4 py-2 text-gray-700 bg-gray-200 rounded disabled:opacity-50"
-        >
-          Next
-        </button>
-      </div>
-
-      <div className="flex flex-wrap items-center justify-center gap-2 mt-2 sm:mt-0">
-        <span className="px-4 py-2 text-gray-700 bg-gray-100 rounded">
-          Total Page: {totalPages}
-        </span>
-        <span
+        {totalAmount ? (
+          <div className="w-1/2 pt-10 mx-auto">
+            <h6 className="font-bold text-end lg:text-xl">
+              Total Amount :{" "}
+              <span className="text-2xl text-lavender--600">{totalAmount.toLocaleString("en-IN")}</span>
+            </h6>
+          </div>
+        ) : null}
+        {/* <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        /> */}
+        
+     <div className="flex items-center justify-center mt-4 space-x-2">
+          <button
+            onClick={() => setCurrentPage(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="px-4 py-2 text-gray-700 bg-gray-200 rounded disabled:opacity-50"
+          >
+            Previous
+          </button>
+          <button
+            className={`px-4 py-2 rounded ${
+              currentPage
+                ? "bg-lavender--600 text-white"
+                : "bg-gray-200 text-gray-700"
+            }`}
+          >
+            {currentPage}
+          </button>
+          <button
+            onClick={() => setCurrentPage(currentPage + 1)}
+            disabled={currentPage === totalPages || totalPages === 0}
+            className="px-4 py-2 w-[100px] text-gray-700 bg-gray-200 rounded disabled:opacity-50"
+          >
+            Next
+          </button>
+          <div className="absolute flex px-3 space-x-2 rounded right-10 ">
+          <span  className="px-4 py-2 text-center text-gray-700 bg-gray-100 rounded" >Total Page: <span >{totalPages}</span>
+         </span>
+         <span
           onClick={() => setCurrentPage(totalPages)}
-          className={`px-4 py-2 bg-gray-100 rounded ${
-            totalPages === currentPage
-              ? "opacity-50 cursor-not-allowed"
-              : "text-blue-400 hover:text-blue-800 cursor-pointer"
-          }`}
+          className={`${totalPages === currentPage ? 'disabled opacity-50  bg-gray-100 px-4 py-2 cursor-not-allowed' : 'px-4 py-2 text-blue-400 bg-gray-100 rounded active:text-blue-800 hover:cursor-pointer'} `}
         >
           Last Page
         </span>
-      </div>
-    </div>
-  </div>
+         </div>
+                </div>
+              </div>
         
               {/* NEW EXPENSE FORM MODAL */}
               <Modal isOpen={isModalOpen} onClose={handleCloseModal}>

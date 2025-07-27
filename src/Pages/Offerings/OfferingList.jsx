@@ -428,7 +428,8 @@ const handleDownloadPDF = async () => {
 
       <div className="h-full p-5 mx-1 mt-3 bg-white shadow-md rounded-xl ">
         <div className="flex flex-col items-center justify-between lg:flex-row">
-          <div className="flex flex-wrap items-center p-4 space-x-3 space-y-3 lg:space-y-0 lg:space-x-3">
+                   <div className="flex flex-wrap items-center justify-center gap-4 ">
+
             <div className="flex flex-col items-start w-full px-1 space-y-2 border rounded-lg lg:flex-row lg:items-center lg:space-y-0 lg:w-auto">
               <label htmlFor="from-date" className="text-gray-700">
                 From:
@@ -468,7 +469,7 @@ const handleDownloadPDF = async () => {
               />
             </span> */}
          
-            <div className="relative">
+            <div className="relative w-full md:w-auto">
               <div className="absolute inset-y-0 flex items-center pointer-events-none start-0 ps-3">
                 <svg
                   className="w-3 h-3 text-gray-500 dark:text-gray-400"
@@ -489,14 +490,14 @@ const handleDownloadPDF = async () => {
               <input
                 type="search"
                 id="default-search"
-                className="block py-1 text-sm text-gray-900 rounded w-54 ps-8 bg-gray-50 focus:ring-lavender--600 focus:border-lavender--600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lavender--600 dark:focus:border-lavender--600"
+                className="block w-full py-1 text-sm text-gray-900 rounded w-54 ps-8 bg-gray-50 focus:ring-lavender--600 focus:border-lavender--600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lavender--600 dark:focus:border-lavender--600"
                 placeholder="Search..."
                 value={searchQuery}
                 onChange={handleSearch}
               />
             </div>
           </div>
-          <div className="flex w-full gap-x-4 lg:w-auto">
+          <div className="flex w-full py-4 gap-x-4 lg:w-auto">
          { fromDate && toDate? <button
               onClick={handleDownloadPDF}
               className="mr-4 text-blue-600 cursor-pointer hover:text-blue-800"
@@ -530,8 +531,9 @@ const handleDownloadPDF = async () => {
           onPageChange={handlePageChange}
       
         /> */}
+<div className="flex flex-wrap items-center justify-center gap-4 mt-4 md:justify-between ">
 
-<div className="flex items-center justify-center mt-4 space-x-2">
+  <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setCurrentPage(CurrentPage - 1)}
             disabled={CurrentPage === 1}
@@ -555,7 +557,10 @@ const handleDownloadPDF = async () => {
           >
             Next
           </button>
-          <div className="absolute flex px-3 space-x-2 rounded right-10 ">
+  </div>
+ 
+ 
+    <div className="flex space-x-2 rounded right-10">
   <span  className="px-4 py-2 text-center text-gray-700 bg-gray-100 rounded" >Total Page: <span >{TotalPages}</span>
  </span>
  <span
@@ -567,7 +572,6 @@ const handleDownloadPDF = async () => {
  </div>
         </div>
       </div>
-
 
       <Modal
         isOpen={isModalOpen}

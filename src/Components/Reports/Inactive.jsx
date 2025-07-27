@@ -191,7 +191,8 @@ return fetchData();
             </button> */}
           </div>
         </div>
-        <div className="grid grid-cols-4 gap-2 mb-4">
+               <div className="grid grid-cols-2 gap-2 mb-4 md:grid-cols-4">
+
           <div>
             <label className="block mb-1 text-gray-600">Reason</label>
             <select
@@ -235,14 +236,14 @@ return fetchData();
           </div>
         </div>
 
-        <div ref={componentRef}>
+        <div className="overflow-x-auto" ref={componentRef}>
           <table className="min-w-full bg-white">
             <thead>
               <tr>
                 {tableHeading.map((heading) => (
                   <th
                     key={heading}
-                    className="px-4 py-2 text-left border-b text-base text-gray-700 bg-white dark:bg-gray-700 dark:text-gray-400"
+                    className="px-4 py-2 text-base text-left text-gray-700 bg-white border-b dark:bg-gray-700 dark:text-gray-400"
                   >
                     {heading}
                   </th>

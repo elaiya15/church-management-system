@@ -175,7 +175,8 @@ return fetchData();
             </button> */}
           </div>
         </div>
-        <div className="grid grid-cols-4 gap-2 mb-4">
+               <div className="grid grid-cols-2 gap-2 mb-4 md:grid-cols-4">
+
           <div>
             <label className="block mb-1 text-gray-600">Status</label>
             <select
@@ -218,7 +219,7 @@ return fetchData();
           </div>
         </div>
 
-        <div ref={componentRef}>
+        <div className="overflow-x-auto" ref={componentRef}>
           <table className="min-w-full bg-white">
             <thead>
               <tr>
