@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { URL } from "../App";
 import axios from "axios";
@@ -10,6 +10,33 @@ function Login() {
   const [ResponseMessage, setResponseMessage] = useState("");
   const [ResponseColor, setResponseColor] = useState("");
 
+
+
+
+  const [status, setStatus] = useState(null); // null | 'success' | 'error'
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(`${URL}`, { timeout: 90000 });
+        console.log(response.data);
+        setStatus("success");
+      } catch (error) {
+        console.error(error);
+        setStatus("error");
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  // Auto-hide message after 3 seconds
+  useEffect(() => {
+    if (status) {
+      const timer = setTimeout(() => setStatus(null), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [status]);
 
 
    const handleDemo = async (event) => {
@@ -70,6 +97,17 @@ function Login() {
   };
   return (
     <React.Fragment>
+       {status === "success" && (
+        <div className="fixed p-3 text-green-800 transition-opacity duration-300 bg-green-100 rounded-md shadow-md top-4 right-4">
+          ✅  Server handshake successfully!
+        </div>
+      )}
+
+      {status === "error" && (
+        <div className="fixed p-3 text-red-800 transition-opacity duration-300 bg-red-100 rounded-md shadow-md top-4 right-4">
+          ❌ Server handshake failed! Please try again.
+        </div>
+      )}
       <section className="bg-[url('./assets/login-bg-min.png')] bg-cover bg-center bg-no-repeat bg-lavender--600 w-screen h-screen flex-col flex items-center justify-center">
         <div className="w-full max-w-xs p-8 bg-white border border-gray-200 shadow 2xl:max-w-lg lg:max-w-sm xl:max-w-md lg:p-10 xl:p-12 rounded-3xl sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
           <form
